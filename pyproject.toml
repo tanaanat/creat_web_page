@@ -5,6 +5,9 @@ description = "Add your description here"
 dependencies = [
     "sudo>=1.0.0",
     "fastapi>=0.111.0",
+    "pgcli>=4.1.0",
+    "psycopg[binary]>=3.1.19",
+    "sqlalchemy>=2.0.31",
 ]
 readme = "README.md"
 requires-python = ">= 3.8"

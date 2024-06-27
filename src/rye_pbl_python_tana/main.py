@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-
+from database import read_table  #インポートする時 "."を前に着ける
+from database import read_id
 app = FastAPI()
 
 
@@ -23,3 +24,14 @@ def read_item(item_id: int, q: str = None):
 @app.put("/items/{item_id}")
 def update_item(item_id: int, item: Item):
     return {"item_name": item.name, "item_id": item_id}
+
+
+
+@app.get("/database")
+def read_User(): 
+    return read_table()
+    #datebase と名前変える
+
+@app.get("/{id}")
+def read_Id(id:int): 
+    return read_id(id)
