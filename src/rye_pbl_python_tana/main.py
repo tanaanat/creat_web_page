@@ -1,8 +1,23 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,Body
 from pydantic import BaseModel
+from fastapi import HTTPException
 from database import read_table  #インポートする時 "."を前に着ける
 from database import read_id
+from fastapi.middleware.cors import CORSMiddleware
+from database import  delete_user
+from models import User
+from database import create_user
+import models
+
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class Item(BaseModel):
@@ -28,10 +43,26 @@ def update_item(item_id: int, item: Item):
 
 
 @app.get("/database")
-def read_User(): 
+def read_user(): 
     return read_table()
     #datebase と名前変える
 
-@app.get("/{id}")
-def read_Id(id:int): 
+@app.get("/users/{id}")
+def getuser_id(id:int): 
     return read_id(id)
+
+# ユーザー追加エンドポイント（POSTメソッド）
+@app.post("/post")
+def create_users(id: int = Body(...),name: str = Body(...),age: str = Body(...)):
+    user=User(id=id,name=name,age=age)  
+    create_user(user)
+    return {"message": "User created successfully"}
+
+# ユーザー削除エンドポイント（DELETEメソッド）
+@app.delete("/delete/{id}")
+def delete_userid(id:int):
+    delete_user(id)
+    # result = delete_user(id)  # 実際に削除する処理
+    # if not result:
+    #     raise HTTPException(status_code=404, detail="ユーザーが見つかりません")
+    # return{"message": f"ユーザー {id} が削除されました"}
