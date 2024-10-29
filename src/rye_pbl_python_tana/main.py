@@ -59,10 +59,14 @@ def create_users(id: int = Body(...),name: str = Body(...),age: str = Body(...))
     return {"message": "User created successfully"}
 
 # ユーザー削除エンドポイント（DELETEメソッド）
+# @app.delete("/delete/{id}")
+# def delete_userid(id:int):
+#     delete_user(id)
+#     result = delete_user(id)  # 実際に削除する処理
+#     if not result:
+#         raise HTTPException(status_code=404, detail="ユーザーが見つかりません")
+#     return{"message": f"ユーザー {id} が削除されました"}
+
 @app.delete("/delete/{id}")
-def delete_userid(id:int):
-    delete_user(id)
-    # result = delete_user(id)  # 実際に削除する処理
-    # if not result:
-    #     raise HTTPException(status_code=404, detail="ユーザーが見つかりません")
-    # return{"message": f"ユーザー {id} が削除されました"}
+def delete_usert(id:int):
+    return 
