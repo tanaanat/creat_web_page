@@ -38,7 +38,7 @@ def add_user(user):
     session.add(user)
 
 def delete_user(id):
-    session.query(User).filter(User.id == id).delete()
+    return session.query(User).filter(User.id == id).delete()
 
 
 # def delete_user(user_id):

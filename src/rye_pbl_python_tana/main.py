@@ -4,7 +4,7 @@ from fastapi import HTTPException
 from database import read_table  #インポートする時 "."を前に着ける
 from database import read_id
 from fastapi.middleware.cors import CORSMiddleware
-from database import  delete_user
+from database import delete_user
 from models import User
 from database import create_user
 import models
@@ -56,7 +56,7 @@ def getuser_id(id:int):
 def create_users(id: int = Body(...),name: str = Body(...),age: str = Body(...)):
     user=User(id=id,name=name,age=age)  
     create_user(user)
-    return {"message": "User created successfully"}
+    return create_user(user)
 
 # ユーザー削除エンドポイント（DELETEメソッド）
 # @app.delete("/delete/{id}")
@@ -68,5 +68,5 @@ def create_users(id: int = Body(...),name: str = Body(...),age: str = Body(...))
 #     return{"message": f"ユーザー {id} が削除されました"}
 
 @app.delete("/delete/{id}")
-def delete_usert(id:int):
-    return 
+def delete_userid(id:int):
+    return delete_user(id)

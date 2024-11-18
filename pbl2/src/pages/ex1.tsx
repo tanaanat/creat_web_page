@@ -68,6 +68,7 @@ export default function Bottonpage() {
       setId(""); // フォームをリセット
       setName(""); // フォームをリセット
       setAge(""); // フォームをリセット
+      await getItems();//最新のデータを取得してテーブルを更新
     } catch (err) {
       console.error(err);
     }
